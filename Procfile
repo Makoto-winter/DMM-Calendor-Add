@@ -1,1 +1,2 @@
-web: python brain.py worker: python brain.py
+web: python brain.py
+worker: python brain.py
