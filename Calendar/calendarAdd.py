@@ -120,3 +120,34 @@ def CalendarAdd(teacher, lesson_time):
     except HttpError as error:
         print('An error occurred: %s' % error)
 
+
+def events_deleter_for_debugging():
+    creds = None
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('token.json'):
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+
+    while True:
+        service = build('calendar', 'v3', credentials=creds)
+        page_token = None
+        while True:
+            events = service.events().list(calendarId='primary', pageToken=page_token, q="DMM").execute()
+            for event in events['items']:
+                IDtoBeDeleted = event["id"]
+                service.events().delete(calendarId='primary', eventId=IDtoBeDeleted).execute()
+            page_token = events.get('nextPageToken')
+            if not page_token:
+                break

@@ -1,1 +1,2 @@
-web: gunicorn brain:app --workers 1
+web: python brain.py
+worker: python brain.py
