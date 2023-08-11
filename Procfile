@@ -1,1 +1,1 @@
-worker: python brain.py
+web: gunicorn brain:app --workers 1
