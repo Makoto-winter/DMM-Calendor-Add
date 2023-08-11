@@ -15,8 +15,11 @@ def main():
     # {'teacher': 'Shawn', 'time': 'August 01, 2023 22:30'}
     # ]
     # iterating through the list
-    for nth_class in search_gmail.booked_classes_info:
-        add.CalendarAdd(nth_class['teacher'], nth_class['time'])
+    try:
+        for nth_class in search_gmail.booked_classes_info:
+            add.CalendarAdd(nth_class['teacher'], nth_class['time'])
+    except Exception as e:
+        print(e)
 
 
 if __name__ == '__main__':

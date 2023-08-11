@@ -64,11 +64,15 @@ def getEmails():
 
 
 def GetTeacherNamesAndTimes():
-	# splitting email_bodies' text to get the teacher name and date/time for a booked class.
-	global email_bodies
-	for email in email_bodies:
-		teacher_name = email.split("with Teacher ")[1].split(" for ")[0]
-		lesson_time = email.split("with Teacher ")[1].split(" for ")[1].split(".")[0]
-		global booked_classes_info
-		booked_classes_info.append({"teacher": teacher_name, "time": lesson_time})
-	print(booked_classes_info)
+	try:
+		# splitting email_bodies' text to get the teacher name and date/time for a booked class.
+		global email_bodies
+		for email in email_bodies:
+			teacher_name = email.split("with Teacher ")[1].split(" for ")[0]
+			lesson_time = email.split("with Teacher ")[1].split(" for ")[1].split(".")[0]
+			global booked_classes_info
+			booked_classes_info.append({"teacher": teacher_name, "time": lesson_time})
+		print(booked_classes_info)
+	except Exception as e:
+		print(e)
+
