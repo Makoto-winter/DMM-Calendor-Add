@@ -21,6 +21,10 @@ def main():
     except Exception as e:
         print(e)
 
+    # Initializing two global variables
+    search_gmail.email_bodies = []
+    search_gmail.booked_classes_info = []
+
 
 if __name__ == '__main__':
     while True:
