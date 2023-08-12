@@ -30,5 +30,5 @@ if __name__ == '__main__':
     while True:
         main()
         # execute main every 30 minutes
-        time.sleep(1 * 60)
+        time.sleep(30 * 60)
 
